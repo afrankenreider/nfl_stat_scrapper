@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-def create_webdriver(driver=None, headless=False):
+def create_webdriver(driver=None, headless=True):
     """Creates a general webdriver session, sets default wait time to 90 sec"""
 
     options = Options()
