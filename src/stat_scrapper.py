@@ -2,8 +2,8 @@ import time
 import pandas as pd
 
 # from src.tools.utils import create_webdriver
-from utils import create_webdriver
-from xpath_links import xpaths
+from tools.utils import create_webdriver
+from tools.xpath_links import xpaths
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
