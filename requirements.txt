@@ -1,0 +1,4 @@
+elastic-apm==6.0.0
+pandas
+selenium
+structlog==21.1.0
