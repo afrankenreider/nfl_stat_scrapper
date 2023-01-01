@@ -9,7 +9,6 @@ def create_webdriver(driver=None, headless=True):
     options = Options()
     options.headless = headless
     options.add_argument("--incognito")
-    options.add_experimental_option("w3c", False)
     options.add_argument("--disable-notifications")
     options.add_argument("--window-size=1920,1080")
     options.add_argument('--whitelisted-ips=""')

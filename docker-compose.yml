@@ -1,0 +1,8 @@
+version: "3.1"
+services:
+  script:
+    build: .
+    image: nfl_stats
+    container_name: nfl_stats
+    ports:
+      - 8055:9000

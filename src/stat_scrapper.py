@@ -1,4 +1,3 @@
-import time
 import pandas as pd
 
 from tools.utils import create_webdriver
@@ -21,8 +20,9 @@ class NFLStatScrapper:
         self.driver.get(self.nfl_url)
         try:
             # make sure stat title is visible before continuing
-            stat_title = self.driver.find_element_by_xpath(
-                '//*[@id="fittPageContainer"]/div[3]/div/div/section[1]/div/div[1]/h1'
+            stat_title = self.driver.find_element(
+                "xpath",
+                '//*[@id="fittPageContainer"]/div[3]/div/div/section[1]/div/div[1]/h1',
             ).text
 
         except Exception as e:
@@ -45,13 +45,14 @@ class NFLStatScrapper:
 
                 complete_stats.click()
 
-                self.driver.find_element_by_xpath(
-                    '//*[@id="fittPageContainer"]/div[3]/div/div/section/div/div[4]/div[2]/a'
+                self.driver.find_element(
+                    "xpath",
+                    '//*[@id="fittPageContainer"]/div[3]/div/div/section/div/div[4]/div[2]/a',
                 ).click()
 
-                rows = len(self.driver.find_elements_by_xpath(table_rows))
+                rows = len(self.driver.find_elements("xpath", table_rows))
 
-                cols = len(self.driver.find_elements_by_xpath(table_cols))
+                cols = len(self.driver.find_elements("xpath", table_cols))
             except Exception as e:
                 print(f"Failed to find rows, cols: {e}")
         else:
@@ -75,18 +76,20 @@ class NFLStatScrapper:
 
         # append values to dataframe
         for r in range(1, rows + 1):
+            value_lst = []
             for p in range(1, cols + 1):
 
                 # get player names
-                value = self.driver.find_element_by_xpath(
-                    xpaths.PASSING_ROWS + "[" + str(r) + "]/td[" + str(p) + "]"
+                value = self.driver.find_element(
+                    "xpath", xpaths.PASSING_ROWS + "[" + str(r) + "]/td[" + str(p) + "]"
                 ).text
 
                 # ignore the rank from webpage
                 if value.isdigit() == True:
                     pass
                 else:
-                    df = df.append({"player": value}, ignore_index=True)
+                    value_lst.append(value)
+                    df.loc[len(df)] = value_lst
 
         return df
 
@@ -128,8 +131,9 @@ class NFLStatScrapper:
             for p in range(1, cols + 1):
 
                 # get player stats
-                value = self.driver.find_element_by_xpath(
-                    xpaths.PASSING_STAT_ROWS + "[" + str(r) + "]/td[" + str(p) + "]"
+                value = self.driver.find_element(
+                    "xpath",
+                    xpaths.PASSING_STAT_ROWS + "[" + str(r) + "]/td[" + str(p) + "]",
                 ).text
 
                 value_lst.append(value)
