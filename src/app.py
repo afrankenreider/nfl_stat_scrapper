@@ -16,6 +16,8 @@ def run_stat_scrapper():
     print(stats.head(5))
     logging.info("NFL stat scrapping was successful!")
 
+    nfl_page.tear_down_driver()
+
 
 if __name__ == "__main__":
     run_stat_scrapper()
