@@ -15,6 +15,10 @@ class NFLStatScrapper:
         self.nfl_url = "https://www.espn.com/nfl/stats"
         self.driver = create_webdriver()
 
+    def tear_down_driver(self):
+        self.driver.close()
+        self.driver.quit()
+
     def open_stats(self):
         """Open correct stats page."""
         self.driver.get(self.nfl_url)
