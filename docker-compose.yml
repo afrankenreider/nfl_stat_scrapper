@@ -1,7 +1,19 @@
 version: "3"
 services:
+  script:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nfl_stats
+    restart: always
+    container_name: nfl_stats
+    depends_on:
+      - selenium-hub
+      - chrome
+
   chrome:
     image: selenium/node-chrome:4.1.4-20220427
+    restart: always
     shm_size: 2gb
     depends_on:
       - selenium-hub
@@ -12,19 +24,11 @@ services:
       - SE_NODE_MAX_INSTANCES=2
       - SE_NODE_MAX_SESSIONS=2
 
-  script:
-    build: .
-    image: nfl_stats
-    container_name: nfl_stats
-    depends_on:
-      - selenium-hub
-
   selenium-hub:
     image: selenium/hub:4.1.4-20220427
+    restart: always
     container_name: selenium-hub
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
-      
-  

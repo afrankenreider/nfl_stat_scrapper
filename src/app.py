@@ -1,7 +1,12 @@
 import logging
 import pandas as pd
 
+from apscheduler.schedulers import background
 from stat_scrapper import NFLStatScrapper
+
+
+logging.basicConfig()
+scheduler = background.BlockingScheduler()
 
 
 def run_stat_scrapper():
@@ -24,5 +29,5 @@ def run_stat_scrapper():
     nfl_page.tear_down_driver()
 
 
-if __name__ == "__main__":
-    run_stat_scrapper()
+scheduler.add_job(run_stat_scrapper, "cron", day_of_week="mon-fri", hour=8, minute=30)
+scheduler.start()

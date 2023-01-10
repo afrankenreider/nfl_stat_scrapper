@@ -21,7 +21,7 @@ def create_webdriver(driver=None, headless=True):
 
     # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver = webdriver.Remote(
-        command_executor="http://127.0.0.1:4444/wd/hub", options=options
+        command_executor="http://selenium-hub:4444/wd/hub", options=options
     )
     driver.implicitly_wait(90)
     driver.get("https://www.google.com")

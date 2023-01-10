@@ -1,3 +1,4 @@
+apscheduler==3.9.1
 pandas==1.5.2
 selenium==4.7.2
 structlog==21.1.0
